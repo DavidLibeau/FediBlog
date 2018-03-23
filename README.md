@@ -16,4 +16,4 @@
 
 ## Catchword
 
-> Easy self-hosted, ActivityPub, Markdown, PHP, NoSQL, fully customisable blog engine for noob web devs !
+> Easy self-hosted, ActivityPub, Markdown, PHP, NoSQL, fully customisable blog engine for noob web devs and others !
