@@ -13,7 +13,9 @@
 - Backup system ftw
 - Theme
 - Markdown online editor (download file to upload via FTP)
+- Emojis support 💩
+- Peer-to-peer support with dat:// (maybe in a separated project)
 
 ## Catchword
 
-> Easy self-hosted, ActivityPub, Markdown, PHP, NoSQL, fully customisable blog engine for noob web devs and others !
+> Easy self-hosted, ActivityPub, Markdown, PHP, NoSQL, fully customisable blog engine for noob web devs and others!
