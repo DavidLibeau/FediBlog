@@ -8,10 +8,10 @@
 - ActivityPub
 - Markdown (Markdown Extra)
 - No private admin panel (only FTP or fonctions with email/Mastodon auth)
-- Likes (+ share btn)
+- Likes (+ share button)
 - Comments (?)
 - Backup system ftw
-- Theme
+- Theming (template customization + CSS themes)
 - Markdown online editor (download file to upload via FTP)
 - Emojis support 💩
 - Peer-to-peer support with dat:// (maybe in a separated project)
