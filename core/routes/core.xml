@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <route>
+        <content>test</content>
+        <return method="get">
+            <function>Test->view</function>
+        </return>
+        <route>
+            <content>:param</content>
+            <return method="get">
+                <function>Test->view1param</function>
+                <params>:this</params>
+            </return>
+        </route>
+    </route>
+    <route>
+        <content>test3params</content>
+        <return method="get">
+            <function>Test->view3params</function>
+            <params>
+                <param1>yay</param1>
+                <param2>hey</param2>
+                <param3>ahoy</param3>
+            </params>
+        </return>
+    </route>
+    <route>
+        <content>:default</content>
+        <return method="get">
+            <function>Content->view</function>
+            <params>:this</params>
+        </return>
+        <route>
+            <content>comments</content>
+            <return method="get">
+                <function>Content->viewComments</function>
+                <params>:this</params>
+            </return>
+            <return method="get" application="activity+json">
+                <function>Content->viewCommentsActivityJson</function>
+                <params>:this</params>
+            </return>
+        </route>
+    </route>
+    <route>
+        <content>media</content>
+        <route>
+            <content>:media</content>
+            <return method="get">
+                <function>Content->viewMedia</function>
+                <params>:this</params>
+            </return>
+        </route>
+    </route>
+    <route>
+        <content>account(s)?</content>
+        <return method="get">
+            <function>User->viewAll</function>
+        </return>
+        <route>
+            <content>:username</content>
+            <return method="get">
+                <function>User->view</function>
+                <params>:this</params>
+            </return>
+            <return method="get" application="json">
+                <function>User->viewJson</function>
+                <params>:this</params>
+            </return>
+            <return method="get" application="activity+json">
+                <function>User->viewActivityJson</function>
+                <params>:this</params>
+            </return>
+            <route>
+                <content>json</content>
+                <return method="get">
+                    <function>User->viewJson</function>
+                    <params>:parent</params>
+                </return>
+            </route>
+            <route>
+                <content>inbox</content>
+                <return method="get">
+                    <function>User->viewInbox</function>
+                    <params>:parent</params>
+                </return>
+            </route>
+            <route>
+                <content>outbox</content>
+                <return method="get">
+                    <function>User->viewOutbox</function>
+                    <params>:parent</params>
+                </return>
+            </route>
+            <route>
+                <content>follows</content>
+                <return method="get">
+                    <function>User->viewFollows</function>
+                    <params>:parent</params>
+                </return>
+            </route>
+            <route>
+                <content>followers</content>
+                <return method="get">
+                    <function>User->viewFollowers</function>
+                    <params>:parent</params>
+                </return>
+            </route>
+        </route>
+    </route>
+</routes>
