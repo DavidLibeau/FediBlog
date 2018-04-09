@@ -63,18 +63,38 @@
                 <function>User->view</function>
                 <params>:this</params>
             </return>
-            <return method="get" application="json">
-                <function>User->viewJson</function>
-                <params>:this</params>
-            </return>
-            <return method="get" application="activity+json">
-                <function>User->viewActivityJson</function>
-                <params>:this</params>
-            </return>
+            <route>
+                <content type="application/json"></content>
+                <return method="get">
+                    <function>User->viewActivityJson</function>
+                    <params>:this</params>
+                </return>
+            </route>
+            <route>
+                <content type="application/activity+json"></content>
+                <return method="get">
+                    <function>User->viewActivityJson</function>
+                    <params>:this</params>
+                </return>
+            </route>
             <route>
                 <content>json</content>
                 <return method="get">
                     <function>User->viewJson</function>
+                    <params>:parent</params>
+                </return>
+            </route>
+            <route>
+                <content>activityjson</content>
+                <return method="get">
+                    <function>User->viewActivityJson</function>
+                    <params>:parent</params>
+                </return>
+            </route>
+            <route>
+                <content>dump</content>
+                <return method="get">
+                    <function>User->dump</function>
                     <params>:parent</params>
                 </return>
             </route>
@@ -104,6 +124,26 @@
                 <return method="get">
                     <function>User->viewFollowers</function>
                     <params>:parent</params>
+                </return>
+            </route>
+            <route>
+                <content>avatar.jpg</content>
+                <return method="get">
+                    <function>User->image</function>
+                    <params>
+                        <param>:parent</param>
+                        <param>avatar.jpg</param>
+                    </params>
+                </return>
+            </route>
+            <route>
+                <content>header.jpg</content>
+                <return method="get">
+                    <function>User->image</function>
+                    <params>
+                        <param>:parent</param>
+                        <param>header.jpg</param>
+                    </params>
                 </return>
             </route>
         </route>

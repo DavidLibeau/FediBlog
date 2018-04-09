@@ -2,4 +2,4 @@ DirectoryIndex core/app.php?q=index
 
 RewriteEngine On
 
-RewriteRule ^(.*)$ core/app.php?q=$1 [L,QSA]
+RewriteRule "^(.*)$" "core/app.php?q=$1" [L,QSA]

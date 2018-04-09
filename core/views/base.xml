@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html lang="{{$lang}}">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{$title}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="theme-color" content="#0070C0">
+    </head>
+    <body>
+        
+    </body>
+</html>
