@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+    <head>
+        <title>Content : {{$id}}</title>
+    </head>
+    <body>
+        <main class="content">
+            {{markdown($data)}}
+        </main>
+    </body>
+</view>

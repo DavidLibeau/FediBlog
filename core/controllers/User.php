@@ -11,6 +11,10 @@ class User{
     }
     public function init($id){
         global $core;
+        /*
+        Init
+        @params: $id
+        */
         if(!$this->initDone){
             $this->data=simplexml_load_file("../data/user/".$id.".xml");
             if(!$this->data){
