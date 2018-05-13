@@ -77,11 +77,11 @@ class Core{
                         }
                     }else{
                         if($route->return->params==":this"){
-                            $params[]=$query[$qPos-1];
+                            $params[]=strtolower($query[$qPos-1]);
                         }else if($route->return->params==":parent"){
-                            $params[]=$query[$qPos-2];
+                            $params[]=strtolower($query[$qPos-2]);
                         }else{
-                            $params[]=$route->return->params;
+                            $params[]=strtolower($route->return->params);
                         }
                     }
                     //var_dump($class);
