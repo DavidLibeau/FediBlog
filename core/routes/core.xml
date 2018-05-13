@@ -53,7 +53,7 @@
         </route>
     </route>
     <route>
-        <content>account(s)?</content>
+        <content>account(s)?|user(s)?</content>
         <return method="get">
             <function>User->viewAll</function>
         </return>
@@ -113,9 +113,9 @@
                 </return>
             </route>
             <route>
-                <content>follows</content>
+                <content>following</content>
                 <return method="get">
-                    <function>User->viewFollows</function>
+                    <function>User->viewFollowing</function>
                     <params>:parent</params>
                 </return>
             </route>

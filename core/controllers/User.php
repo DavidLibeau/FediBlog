@@ -51,6 +51,10 @@ class User{
     public function viewActivityJson($id) {
         global $core;
         $this->init($id);
+        /*
+        viewActivityJson : view object in Activity Pub json format
+        @param: $id
+        */
         
         $activityjson=array(
             "@context" => array(
@@ -79,6 +83,62 @@ class User{
         );
         View::render("json",$activityjson);
     }
+    public function viewFollowing($id){
+        global $core;
+        $this->init($id);
+        /*
+        viewFollowing : view following in Activity Pub json format
+        @param: $id
+        */
+        
+        $activityjson=array(
+            "@context" => array(
+                "https://www.w3.org/ns/activitystreams",
+            ),
+            "id" => "https://".$core->get("domain")."/account/".$this->id,
+            "type" => "OrderedCollection",
+            "totalItems" => 0,
+        );
+        View::render("json",$activityjson);
+    }
+    public function viewFollowers($id){
+        global $core;
+        $this->init($id);
+        /*
+        viewFollowers : view followers in Activity Pub json format
+        @param: $id
+        */
+        
+        $activityjson=array(
+            "@context" => array(
+                "https://www.w3.org/ns/activitystreams",
+            ),
+            "id" => "https://".$core->get("domain")."/account/".$this->id,
+            "type" => "OrderedCollection",
+            "totalItems" => 0,
+        );
+        View::render("json",$activityjson);
+    }
+    public function viewOutbox($id){
+        global $core;
+        $this->init($id);
+        /*
+        viewFollowers : view outbox in Activity Pub json format
+        @param: $id
+        */
+        
+        $activityjson=array(
+            "@context" => array(
+                "https://www.w3.org/ns/activitystreams",
+            ),
+            "id" => "https://".$core->get("domain")."/account/".$this->id,
+            "type" => "OrderedCollection",
+            "totalItems" => 0,
+        );
+        View::render("json",$activityjson);
+    }
+    
+    
     public function dump($id) {
         $this->init($id);
         View::render("dump",$this);
