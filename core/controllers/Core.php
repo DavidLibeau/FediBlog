@@ -123,12 +123,12 @@ class Core{
                 header('Content-type: application/json;charset=utf-8');
                 echo(json_encode(array(
                     "subject" => join(":", $query),
-                    "links" => array(
+                    "links" => array(array(
                         "rel" => "self",
                         "href" => "https://".$this->get("domain")."/account/".$username,
                         "type" => "application/activity+json",
-                    ),
-                    "aliases" => "https://".$this->get("domain")."/account/".$username,
+                    )),
+                    "aliases" => array("https://".$this->get("domain")."/account/".$username),
                 )));
             }else{
                 $this->error("404");

@@ -10,6 +10,9 @@ class View{
         }else if($viewName=="json"){
             header('Content-type: application/json;charset=utf-8');
             echo(json_encode($object));
+        }else if($viewName=="activityjson"){
+            header('Content-type: application/activity+json');
+            echo(json_encode($object));
         }else if($viewName=="image"){
             header('Content-type: image/jpeg;charset=utf-8');
             echo($object);
