@@ -55,12 +55,28 @@
         </route>
     </route>
     <route>
-        <content>$server(content/media)</content><!--TO DO: make content/* for all content type-->
+        <content>$server(content/static)</content><!--TO DO: make content/* for all content type (Maybe not ?)-->
+        <route>
+            <content>:id</content>
+            <return method="get">
+                <function>Content->view</function>
+                <params>
+                    <param1>:this</param1>
+                    <param2>static</param2>
+                </params>
+            </return>
+        </route>
+    </route>
+    <route>
+        <content>$server(content/media)</content>
         <route>
             <content>:media</content>
             <return method="get">
                 <function>Content->viewMedia</function>
-                <params>:this</params>
+                <params>
+                    <param1>:this</param1>
+                    <param2>media</param2>
+                </params>
             </return>
         </route>
     </route>

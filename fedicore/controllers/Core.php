@@ -37,6 +37,8 @@ class Core{
                                     if(Server::get("route/".$crparam)==$q){
                                         $foundRoute=true;
                                         $route=$currentRoute;
+                                    }elseif(Server::get("route/".$crparam)=="/"){
+                                        
                                     }
                                 }
                             }
@@ -50,13 +52,25 @@ class Core{
                             if(substr($currentRoute->content,0,1)==":"){ // :this :parent
                                 $foundRoute=true;
                                 $route=$currentRoute;
+                            }elseif(substr((string)$currentRoute->content,0,1)=="$"){//Route is user config
+                                $cr=substr((string)$currentRoute->content,1);
+                                if (preg_match("/(.+\(.+\).*){1}/", $cr)) {
+                                    $crfunction=strtolower(explode("(",$cr)[0]);
+                                    $crparam=str_replace(")","",explode("(",$cr)[1]);
+                                    if($crfunction=="server"){
+                                        if(Server::get("route/".$crparam)=="/"){//If the user defined "/" as route, means that he/she wants the root
+                                            $foundRoute=true;
+                                            $route=$currentRoute->route;//Not this route but its child
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
             
-            foreach($currentRoute->route as $subRoute) {
+            foreach($currentRoute->route as $subRoute) {//subRoute
                 if($subRoute->content==""){
                     foreach($subRoute->content->attributes() as $attr => $attrvalue) {
                         if($attr=="type"){

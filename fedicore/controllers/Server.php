@@ -21,17 +21,28 @@ class Server{
                         switch(explode("/",$var)[1]){
                             case "content":
                                 $route = $serverConfig->xpath("customPath/object[id='content/".explode("/",$var)[2]."']/route/text()");
-                                return((string)$route[0]);
                                 break;
                             case "user":
                                 $route = $serverConfig->xpath("customPath/object[id='user']/route/text()");
-                                return((string)$route[0]);
                                 break;
-                            defautl:
+                            default:
                                 break;
                         }
-                        
-                        //return($serverConfig->customPath->$child);
+                        return((string)$route[0]);
+                        break;
+                    case "path":
+                        switch(explode("/",$var)[1]){
+                            case "content":
+                                $route = $serverConfig->xpath("customPath/object[id='content/".explode("/",$var)[2]."']/path/".explode("/",$var)[3]."/text()");
+                                return((string)$route[0]);
+                                break;
+                            case "user":
+                                $route = $serverConfig->xpath("customPath/object[id='user']/path/".explode("/",$var)[2]."/text()");
+                                return((string)$route[0]);
+                                break;
+                            default:
+                                break;
+                        }
                         break;
                     default:
                         $parent=explode("/",$var)[0];

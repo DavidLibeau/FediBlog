@@ -14,13 +14,13 @@ class Content{
         Init
         @params: $id
         */
+        $this->type=$type;
         if(!$this->initDone && !is_null($id)){
-            $this->content=file_get_contents("../".$id.".txt");
+            $this->content=file_get_contents("../".Server::get("path/content/".$this->type."/content")."/".$id.".txt");
             if(!$this->content){
                 $core->error("404","../".$id.".txt was not found");
             }
             $this->id=$id;
-            $this->type=$type;
         }
     }
     public function get($var){

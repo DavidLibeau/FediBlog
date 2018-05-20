@@ -15,7 +15,7 @@ class User{
         @params: $id
         */
         if(!$this->initDone && !is_null($id)){
-            $this->data=simplexml_load_file("../fedidata/user/".$id.".xml");
+            $this->data=simplexml_load_file("../".Server::get("path/user/data")."/".$id.".xml");
             if(!$this->data){
                 //$core->error("404");
             }
@@ -36,7 +36,7 @@ class User{
         global $core;
         $this->init($id);
         
-        $image=file_get_contents("../data/user/".$this->id."-".$type);
+        $image=file_get_contents("../".Server::get("path/user/data")."/".$this->id."-".$type);
         if(!$image){
             $core->error("404");
         }
