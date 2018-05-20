@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serverConfig>
+    <url>dev.fedi.blog</url>
+    <admin>david</admin>
+    <title>Dev blog for Fedi.blog</title>
+	<subtitle>We are all now connected by the Internet, like neurons in a giant brain.</subtitle>
+	<licence>CC-BY</licence>
+    <defaultPublishing>
+        <author>david</author>
+        <visibility>unlisted</visibility>
+    </defaultPublishing>
+    <customPath>
+        <object>
+            <id>user</id>
+            <route>user</route>
+            <path>
+                <data>fedidata/user</data>
+            </path>
+        </object>
+        <object>
+            <id>content/article</id>
+            <route>article</route>
+            <path>
+                <data>fedidata/content/article</data>
+                <content>article</content>
+            </path>
+        </object>
+        <object>
+            <id>content/static</id>
+            <route>/</route>
+            <path>
+                <data>fedidata/content/static</data>
+                <content>static</content>
+            </path>
+        </object>
+        <object>
+            <id>content/media</id>
+            <route>media</route>
+            <path>
+                <data>fedidata/content/media</data>
+                <content>media</content>
+            </path>
+        </object>
+    </customPath>
+</serverConfig>

@@ -25,25 +25,37 @@
         </return>
     </route>
     <route>
-        <content>:default</content>
+        <content>atom|feed</content>
         <return method="get">
-            <function>Content->view</function>
-            <params>:this</params>
+            <function>Core->getAtomFeed</function>
         </return>
+    </route>
+    <route>
+        <content>$server(content/article)</content>
         <route>
-            <content>comments</content>
+            <content>:id</content>
             <return method="get">
-                <function>Content->viewComments</function>
-                <params>:this</params>
+                <function>Content->view</function><!--TO DO (?): Content(:this,"article")->view()-->
+                <params>
+                    <param1>:this</param1>
+                    <param2>article</param2>
+                </params>
             </return>
-            <return method="get" application="activity+json">
-                <function>Content->viewCommentsActivityJson</function>
-                <params>:this</params>
-            </return>
+            <route>
+                <content>comments</content>
+                <return method="get">
+                    <function>Content->viewComments</function>
+                    <params>:this</params>
+                </return>
+                <return method="get" application="activity+json">
+                    <function>Content->viewCommentsActivityJson</function>
+                    <params>:this</params>
+                </return>
+            </route>
         </route>
     </route>
     <route>
-        <content>media</content>
+        <content>$server(content/media)</content><!--TO DO: make content/* for all content type-->
         <route>
             <content>:media</content>
             <return method="get">
@@ -53,7 +65,7 @@
         </route>
     </route>
     <route>
-        <content>account(s)?|user(s)?</content>
+        <content>$server(user)</content>
         <return method="get">
             <function>User->viewAll</function>
         </return>

@@ -4,6 +4,10 @@ class Core{
     protected $domain="dev.fedi.blog";
     
     public function welcome($query) {
+        /*
+        Routing
+        @params: $query
+        */
         $query=explode("/",$query);
         $qPos=0;
         
@@ -24,7 +28,19 @@ class Core{
                     $qPos++;
                     $foundRoute=false;
                     foreach($route->route as $currentRoute) {
-                        if(preg_match("/^".$currentRoute->content."$/", $q)){
+                        if(substr((string)$currentRoute->content,0,1)=="$"){//Route is user config
+                            $cr=substr((string)$currentRoute->content,1);
+                            if (preg_match("/(.+\(.+\).*){1}/", $cr)) {
+                                $crfunction=strtolower(explode("(",$cr)[0]);
+                                $crparam=str_replace(")","",explode("(",$cr)[1]);
+                                if($crfunction=="server"){
+                                    if(Server::get("route/".$crparam)==$q){
+                                        $foundRoute=true;
+                                        $route=$currentRoute;
+                                    }
+                                }
+                            }
+                        }elseif(preg_match("/^".$currentRoute->content."$/", $q)){
                             $foundRoute=true;
                             $route=$currentRoute;
                         }
@@ -88,15 +104,19 @@ class Core{
                     call_user_func_array(array($class,$functionName),$params);
                 }else{
                     //var_dump($route->return);
-                    call_user_func("".$route->return->function);
+                    call_user_func(array($class,$functionName));
                 }
             }else{
-                $this->error("404");
+                $this->error("404","Route not found");
             }
         }
     }
     
     public static function error($code=200,$message="") {
+        /*
+        Give error page
+        @params: $code, $message
+        */
         if($code!=200 && $message!=""){
             http_response_code($code);
             echo("Error ".$code.": ".$message);
@@ -110,30 +130,92 @@ class Core{
     }
     
     public function get($var){
+        /*
+        Getter
+        @params: $var
+        */
         return($this->$var);
     }
     
+    
     public function webfinger($query){
+        /*
+        Webfinger
+        @params: $query
+        */
         $query=explode(":",$query);
         if($query[0]=="acct"){
             $account=explode("@",$query[1]);
             $username=$account[0];
             $domain=$account[1];
-            if(User::isInDatabase($username) && $domain==$this->get("domain")){
-                header('Content-type: application/json;charset=utf-8');
+            if(User::isInDatabase($username) && $domain==Server::get("domain")){
+                header("Content-type: application/json;charset=utf-8");
                 echo(json_encode(array(
                     "subject" => join(":", $query),
                     "links" => array(array(
                         "rel" => "self",
-                        "href" => "https://".$this->get("domain")."/account/".$username,
+                        "href" => "https://".Server::get("domain")."/account/".$username,
                         "type" => "application/activity+json",
                     )),
-                    "aliases" => array("https://".$this->get("domain")."/account/".$username),
+                    "aliases" => array("https://".Server::get("domain")."/account/".$username),
                 )));
             }else{
                 $this->error("404");
             }
         }
+    }
+    
+    public function getAtomFeed(){
+        /*
+        Atom feed
+        */
+        header("Content-type: text/xml;charset=utf-8");
+$feed='<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>'.Server::get("domain").'</id>
+    <title>'.Server::get("title").'</title>
+    <subtitle>'.Server::get("subtitle").'</subtitle>
+    <author>
+        <name>'.Server::get("admin/name").'</name>
+        <uri>http://'.Server::get("domain")."/".Server::get("route/user")."/".Server::get("admin/id").'</uri>
+    </author>
+    <updated>2003-12-13T18:30:02Z</updated>
+    <rights>'.Server::get("licence").' '.Server::get("admin/name").' '.date("Y").'</rights>
+    <link rel="self" href="/feed" />
+
+    '.$this->listAll("article","atom").'
+</feed>';
+        echo($feed);
+    }
+    
+    public function listAll($contentType,$format="object"){
+        /*
+        List all content
+        @param : $contentType
+        */
+        $objects=[];
+        $return=null;
+        switch($contentType){
+            case "article":
+                foreach (glob("../*.txt") as $filename) {
+                    $articleid=str_replace("../","",substr($filename,0,-4));
+                    $article=new Content();
+                    $article->init($articleid,$contentType);
+                    array_push($objects,$article);
+                }
+                break;
+        }
+        switch($format){
+            case "object":
+                $return=$objects;
+                break;
+            case "atom":
+                foreach ($objects as $object) {
+                    $return.=$object->exportAtom();
+                }
+                break;
+        }
+        return($return);
     }
 }
 

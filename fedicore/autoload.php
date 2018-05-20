@@ -4,7 +4,7 @@ function autoloader($class) {
     if(file_exists("controllers/".$class.".php")){
         require_once("controllers/".$class.".php");
     }
-    require_once("../lib/Parsedown.php");
+    require_once("../fedilib/Parsedown.php");
 }
 spl_autoload_register('autoloader');
 ?>
