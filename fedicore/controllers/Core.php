@@ -11,8 +11,6 @@ class Core{
         $query=explode("/",$query);
         $qPos=0;
         
-        //.well-known/webfinger?resource=acct:david@fedi.blog
-        
         if($query[0]==".well-known"){
             if($query[1]=="webfinger"){
                 if(isset($_GET["resource"]) && $_GET["resource"]!=""){

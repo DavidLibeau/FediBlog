@@ -1,5 +1,3 @@
-DirectoryIndex fedicore/app.php?q=index
-
 RewriteEngine On
 
 RewriteRule "^(.*)$" "fedicore/app.php?q=$1" [L,QSA]
