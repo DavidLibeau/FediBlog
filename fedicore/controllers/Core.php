@@ -226,6 +226,11 @@ $feed='<?xml version="1.0" encoding="utf-8"?>
                     $return.=$object->exportAtom();
                 }
                 break;
+            default:
+                foreach ($objects as $object) {
+                    $return.=View::render($format,$object,"return");
+                }
+                break;
         }
         return($return);
     }

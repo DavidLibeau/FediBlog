@@ -1,0 +1,7 @@
+# dev.fedi.blog
+
+Hello world.
+
+**This is a list of all articles :**
+
+{{list(all,article,htmlSummary)}}
