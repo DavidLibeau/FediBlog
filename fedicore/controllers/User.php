@@ -15,6 +15,9 @@ class User{
         @params: $id
         */
         if(!$this->initDone && !is_null($id)){
+            if($id[0]=="@"){
+                $id=substr($id,1);
+            }
             $this->data=simplexml_load_file("../".Server::get("path/user/data")."/".$id.".xml");
             if(!$this->data){
                 //$core->error("404");

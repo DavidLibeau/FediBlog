@@ -35,8 +35,11 @@ class Core{
                                     if(Server::get("route/".$crparam)==$q){
                                         $foundRoute=true;
                                         $route=$currentRoute;
-                                    }elseif(Server::get("route/".$crparam)=="/"){
-                                        
+                                    }elseif(substr((string)$q,0,1)=="@"){//Route is @user
+                                        if($crparam=="user"){
+                                            $foundRoute=true;
+                                            $route=$currentRoute->route;
+                                        }
                                     }
                                 }
                             }
