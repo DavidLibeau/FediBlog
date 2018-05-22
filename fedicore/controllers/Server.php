@@ -19,11 +19,11 @@ class Server{
                         break;
                     case "route":
                         switch(explode("/",$var)[1]){
-                            case "content":
-                                $route = $serverConfig->xpath("customPath/object[id='content/".explode("/",$var)[2]."']/route/text()");
+                            case "Content":
+                                $route = $serverConfig->xpath("customPath/object[id='Content/".explode("/",$var)[2]."']/route/text()");
                                 break;
-                            case "user":
-                                $route = $serverConfig->xpath("customPath/object[id='user']/route/text()");
+                            case "User":
+                                $route = $serverConfig->xpath("customPath/object[id='User']/route/text()");
                                 break;
                             default:
                                 break;
@@ -32,12 +32,12 @@ class Server{
                         break;
                     case "path":
                         switch(explode("/",$var)[1]){
-                            case "content":
-                                $route = $serverConfig->xpath("customPath/object[id='content/".explode("/",$var)[2]."']/path/".explode("/",$var)[3]."/text()");
+                            case "Content":
+                                $route = $serverConfig->xpath("customPath/object[id='Content/".explode("/",$var)[2]."']/path/".explode("/",$var)[3]."/text()");
                                 return((string)$route[0]);
                                 break;
-                            case "user":
-                                $route = $serverConfig->xpath("customPath/object[id='user']/path/".explode("/",$var)[2]."/text()");
+                            case "User":
+                                $route = $serverConfig->xpath("customPath/object[id='User']/path/".explode("/",$var)[2]."/text()");
                                 return((string)$route[0]);
                                 break;
                             default:

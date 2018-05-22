@@ -6,7 +6,8 @@ class User{
     protected $name;
     protected $description;
     
-    public function __construct(){
+    public function __construct($id=null){
+        $this->init($id);
     }
     public function init($id){
         global $core;
@@ -15,10 +16,11 @@ class User{
         @params: $id
         */
         if(!$this->initDone && !is_null($id)){
+            $this->initDone=true;
             if($id[0]=="@"){
                 $id=substr($id,1);
             }
-            $this->data=simplexml_load_file("../".Server::get("path/user/data")."/".$id.".xml");
+            $this->data=simplexml_load_file("../".Server::get("path/User/data")."/".$id.".xml");
             if(!$this->data){
                 //$core->error("404");
             }
@@ -39,7 +41,7 @@ class User{
         global $core;
         $this->init($id);
         
-        $image=file_get_contents("../".Server::get("path/user/data")."/".$this->id."-".$type);
+        $image=file_get_contents("../".Server::get("path/User/data")."/".$this->id."-".$type);
         if(!$image){
             $core->error("404");
         }
@@ -63,20 +65,20 @@ class User{
                 "https://www.w3.org/ns/activitystreams",
                 "https://w3id.org/security/v1",
             ),
-            "id" => "https://".Server::get("domain")."/".Server::get("route/user")."/".$this->id,
+            "id" => "https://".Server::get("domain")."/".Server::get("route/User")."/".$this->id,
             "type" => "Person",
-            "following" => "https://".Server::get("domain")."/".Server::get("route/user")."/".$this->id."/following",
-            "followers" => "https://".Server::get("domain")."/".Server::get("route/user")."/".$this->id."/followers",
-            "inbox" => "https://".Server::get("domain")."/".Server::get("route/user")."/".$this->id."/inbox",
-            "outbox" => "https://".Server::get("domain")."/".Server::get("route/user")."/".$this->id."/outbox",
+            "following" => "https://".Server::get("domain")."/".Server::get("route/User")."/".$this->id."/following",
+            "followers" => "https://".Server::get("domain")."/".Server::get("route/User")."/".$this->id."/followers",
+            "inbox" => "https://".Server::get("domain")."/".Server::get("route/User")."/".$this->id."/inbox",
+            "outbox" => "https://".Server::get("domain")."/".Server::get("route/User")."/".$this->id."/outbox",
             "preferredUsername" => "David",
             "name" => "".$this->name,
             "summary" => "<p>".$this->description."</p>",
             "manuallyApprovesFollowers" => false,
-            "url" => "https://".Server::get("domain")."/".Server::get("route/user")."/".$this->id,
+            "url" => "https://".Server::get("domain")."/".Server::get("route/User")."/".$this->id,
             "publicKey" => array(
-                "id" => "https://".Server::get("domain")."/".Server::get("route/user")."/".$this->id."#main-key",
-                "owner" => "https://".Server::get("domain")."/".Server::get("route/user")."/".$this->id,
+                "id" => "https://".Server::get("domain")."/".Server::get("route/User")."/".$this->id."#main-key",
+                "owner" => "https://".Server::get("domain")."/".Server::get("route/User")."/".$this->id,
                 "publicKeyPem" => "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyJAjDVrhKSGRQaG8Z59E\nHB7Q7c58pYOGmEpzV2Vrboi9A0EOOH7qrmVsnuncPOoxd31z3cwAQyCz+WkXVsG5\npUbvG3XjzUQKXSwOUemg8jCJ7/JHrqCpaSX5f4i028F+eNX8yjuYlj208COk37qz\nR96p2Nvzm+3RSodcYIf0qEi2d0x+cmoDSMSf3K/AdkgKIi5IA02kStOAt1bXnpeA\nhw0bdMGjq+z6B083zfZKi4Ya6s51fh/kV/dB/K4VxNsKaMXUhwk/558x5v43OiuO\ntBP4bbJwJm8txCt2eG3WxoDxbZvRbenp4DK4P6F0JLi42oVRWnGTcTKzt0F3KK4d\njQIDAQAB\n-----END PUBLIC KEY-----\n",
             ),
             "icon" => array(

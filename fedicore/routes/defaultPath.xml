@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <customPath>
     <object>
-        <id>user</id>
+        <id>User</id>
         <route>user</route>
         <path>
             <data>fedidata/user</data>
         </path>
     </object>
     <object>
-        <id>content/article</id>
+        <id>Content/Article</id>
         <route>article</route>
         <path>
             <data>fedidata/content/article</data>
@@ -16,7 +16,7 @@
         </path>
     </object>
     <object>
-        <id>content/static</id>
+        <id>Content/Static</id>
         <route>/</route>
         <path>
             <data>fedidata/content/static</data>
@@ -24,7 +24,7 @@
         </path>
     </object>
     <object>
-        <id>content/media</id>
+        <id>Content/Media</id>
         <route>media</route>
         <path>
             <data>fedidata/content/media</data>

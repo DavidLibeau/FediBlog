@@ -39,7 +39,7 @@ echo('<?xml version="1.0" encoding="utf-8"?>
     <subtitle>'.Server::get("subtitle").'</subtitle>
     <author>
         <name>'.Server::get("admin/name").'</name>
-        <uri>http://'.Server::get("domain")."/".Server::get("route/user")."/".Server::get("admin/id").'</uri>
+        <uri>http://'.Server::get("domain")."/".Server::get("route/User")."/".Server::get("admin/id").'</uri>
     </author>
     <updated>2003-12-13T18:30:02Z</updated>
     <rights>'.Server::get("licence").' '.Server::get("admin/name").' '.date("Y").'</rights>
@@ -48,7 +48,7 @@ echo('<?xml version="1.0" encoding="utf-8"?>
 </feed>');
                 break;
             case "htmlSummary":
-                $render="<a href=\"/".Server::get("route/content/".$object->get("type"))."/".$object->get("id")."\">".$object->get("id")."</a>";
+                $render="<a href=\"/".Server::get("route/Content/".$object->get("type"))."/".$object->get("id")."\">".$object->get("id")."</a>";
                 break;
             default :
                 $render=file_get_contents("views/".$viewName.".xml");

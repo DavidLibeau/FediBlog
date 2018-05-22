@@ -99,26 +99,24 @@ class Core{
                     if(count($route->return->params->children())!=0){
                         foreach ($route->return->params->children() as $param) {
                             if($param==":this"){
-                                $params[]=$query[$qPos-1];
+                                $params[]=(string)$query[$qPos-1];
                             }else if($param==":parent"){
-                                $params[]=$query[$qPos-2];
+                                $params[]=(string)$query[$qPos-2];
                             }else{
-                                $params[]=$param;
+                                $params[]=(string)$param;
                             }
                         }
                     }else{
                         if($route->return->params==":this"){
-                            $params[]=strtolower($query[$qPos-1]);
+                            $params[]=(string)$query[$qPos-1];
                         }else if($route->return->params==":parent"){
-                            $params[]=strtolower($query[$qPos-2]);
+                            $params[]=(string)$query[$qPos-2];
                         }else{
-                            $params[]=strtolower($route->return->params);
+                            $params[]=(string)$route->return->params;
                         }
                     }
-                    //var_dump($class);
                     call_user_func_array(array($class,$functionName),$params);
                 }else{
-                    //var_dump($route->return);
                     call_user_func(array($class,$functionName));
                 }
             }else{
@@ -192,13 +190,13 @@ $feed='<?xml version="1.0" encoding="utf-8"?>
     <subtitle>'.Server::get("subtitle").'</subtitle>
     <author>
         <name>'.Server::get("admin/name").'</name>
-        <uri>http://'.Server::get("domain")."/".Server::get("route/user")."/".Server::get("admin/id").'</uri>
+        <uri>http://'.Server::get("domain")."/".Server::get("route/User")."/".Server::get("admin/id").'</uri>
     </author>
     <updated>2003-12-13T18:30:02Z</updated>
     <rights>'.Server::get("licence").' '.Server::get("admin/name").' '.date("Y").'</rights>
     <link rel="self" href="/feed" />
 
-    '.$this->listAll("article","atom").'
+    '.$this->listAll("Article","atom").'
 </feed>';
         echo($feed);
     }
@@ -211,7 +209,7 @@ $feed='<?xml version="1.0" encoding="utf-8"?>
         $objects=[];
         $return=null;
         switch($contentType){
-            case "article":
+            case "Article":
                 foreach (glob("../*.txt") as $filename) {
                     $articleid=str_replace("../","",substr($filename,0,-4));
                     $article=new Content();

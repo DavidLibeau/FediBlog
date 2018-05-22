@@ -31,14 +31,14 @@
         </return>
     </route>
     <route>
-        <content>$server(content/article)</content>
+        <content>$server(Content/Article)</content>
         <route>
             <content>:id</content>
             <return method="get">
-                <function>Content->view</function><!--TO DO (?): Content(:this,"article")->view()-->
+                <function>Content->view</function><!--TO DO (?): Content(:this,"Article")->view()-->
                 <params>
                     <param1>:this</param1>
-                    <param2>article</param2>
+                    <param2>Article</param2>
                 </params>
             </return>
             <route>
@@ -55,33 +55,33 @@
         </route>
     </route>
     <route>
-        <content>$server(content/static)</content><!--TO DO: make content/* for all content type (Maybe not ?)-->
+        <content>$server(Content/Static)</content><!--TO DO: make content/* for all content type (Maybe not ?)-->
         <route>
             <content>:id</content>
             <return method="get">
                 <function>Content->view</function>
                 <params>
                     <param1>:this</param1>
-                    <param2>static</param2>
+                    <param2>Static</param2>
                 </params>
             </return>
         </route>
     </route>
     <route>
-        <content>$server(content/media)</content>
+        <content>$server(Content/Media)</content>
         <route>
             <content>:media</content>
             <return method="get">
                 <function>Content->viewMedia</function>
                 <params>
                     <param1>:this</param1>
-                    <param2>media</param2>
+                    <param2>Media</param2>
                 </params>
             </return>
         </route>
     </route>
     <route>
-        <content>$server(user)</content>
+        <content>$server(User)</content>
         <return method="get">
             <function>User->viewAll</function>
         </return>
