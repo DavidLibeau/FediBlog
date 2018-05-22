@@ -1,5 +1,7 @@
 # FediBlog
 
+![Fediblog logo](https://fedi.blog/Fediblog-logo.png)
+
 ## Specifications
 
 - PHP only
